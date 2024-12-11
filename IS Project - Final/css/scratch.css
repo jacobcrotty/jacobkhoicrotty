@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #555555;
+    background-color: rgb(175, 229, 240);
+    
+}
+
+#header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+#header a {
+    margin-right: 10px;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+#header a:hover {
+    color: #f06292;
+}
+
+#title{
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: underline;
+}
+
+#sick{
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    padding: 5px;
+    margin: 50px;
+}
