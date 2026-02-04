@@ -1,215 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Jacob Khoi Crotty - Resume</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Jacob Khoi Crotty</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="images/profile.jpg" alt="..." /></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Certifications</a></li>
-                </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickBooks Transaction Categorizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>🎯 QuickBooks Transaction Categorizer</h1>
+                <p class="subtitle">Upload your bank statement PDF for AI-powered categorization</p>
             </div>
-        </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Jacob Khoi
-                        <span class="text-primary">Crotty</span>
-                    </h1>
-                    <div class="subheading mb-5">
-                        9450 Sierra River Dr · Elk Grove, CA 95624 · (916) 895-8229 ·
-                        <a href="mailto:name@email.com">jacobcrotty38@gmail.com</a>
+        </header>
+
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section card">
+                <h2>📄 Upload Bank Statement</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".pdf" hidden>
+                    <div class="upload-prompt">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p><strong>Click to upload</strong> or drag and drop</p>
+                        <p class="upload-hint">PDF files only</p>
                     </div>
-                    <p class="lead mb-5">I bring a strong attitude of commitment, effort, and diligence in all of my professional experiences and organizations I have been a part of. Uplifting all I encounter with, and driving meaningful results.</p>
-                    <div class="social-icons">
-                        <a class="social-icon" href="https://www.linkedin.com/in/jacob-khôi-crotty-975466220/"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon" href="https://www.instagram.com/jacobkhoicrotty/"><i class="fab fa-instagram"></i></a>
-                        <a class="social-icon" href="https://www.facebook.com/jacobkhoicrotty/"><i class="fab fa-facebook-f"></i></a>
+                    <div class="file-selected hidden" id="fileSelected">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                        </svg>
+                        <p id="fileName">document.pdf</p>
+                        <button class="btn-secondary" id="removeFile">Remove</button>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <label for="apiKeyInput">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        Anthropic API Key (required)
+                    </label>
+                    <input 
+                        type="password" 
+                        id="apiKeyInput" 
+                        placeholder="sk-ant-..." 
+                        class="api-input"
+                    >
+                    <p class="api-hint">Your API key is stored locally and never sent anywhere except Anthropic's API</p>
+                </div>
+
+                <button class="btn-primary" id="analyzeBtn" disabled>
+                    🚀 Analyze Transactions
+                </button>
+
+                <div id="statusMessage" class="status-message hidden"></div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section card hidden" id="resultsSection">
+                <div class="loading hidden" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p><strong>Analyzing your transactions...</strong></p>
+                    <p class="loading-hint">This may take 10-30 seconds</p>
+                </div>
+
+                <div id="resultsContent" class="hidden">
+                    <div class="results-header">
+                        <h2>📊 Transaction Analysis</h2>
+                        <div class="export-buttons">
+                            <button class="btn-secondary" id="exportCsvBtn">
+                                📥 Export CSV
+                            </button>
+                            <button class="btn-secondary" id="copyBtn">
+                                📋 Copy All
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid" id="statsGrid">
+                        <!-- Stats will be inserted here -->
+                    </div>
+
+                    <div class="filter-bar">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search transactions..."
+                            class="search-input"
+                        >
+                        <select id="categoryFilter" class="category-select">
+                            <option value="all">All Categories</option>
+                        </select>
+                        <select id="confidenceFilter" class="confidence-select">
+                            <option value="all">All Confidence Levels</option>
+                            <option value="high">High Confidence</option>
+                            <option value="medium">Medium Confidence</option>
+                            <option value="low">Low Confidence</option>
+                        </select>
+                    </div>
+
+                    <div id="transactionsList" class="transactions-list">
+                        <!-- Transactions will be inserted here -->
                     </div>
                 </div>
             </section>
-            <hr class="m-0" />
-            <!-- Experience-->
-            <section class="resume-section" id="experience">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Experience</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Tax Preparer</h3>
-                            <div class="subheading mb-3">AARP Tax-Aide | Midvale, Utah</div>
-                            <p>
-                                Preparing to assist low-income individuals with tax return filing, with a focus on accuracy and tax law compliance.
-                                Building expertise in client-facing skills and navigating IRS requirements to enhance tax preparation skills.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">January 2025 - April 2025</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Accounting Teaching Assistant</h3>
-                            <div class="subheading mb-3">Brigham Young University | Provo, Utah</div>
-                            <p>Teaching Assistant for Accounting 310, Principles of Accounting II. Used knowledge of accounting principles to teach other students of all backgrounds, including those pursuing careers in accounting. Helping improve performance on exams and assignments, and helping others grasp a deeper understanding of essential accounting principles.</p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">January 2025 - Present</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Volunteer Representative</h3>
-                            <div class="subheading mb-3">Church of Jesus Christ of Latter-Day Saints | Hanoi, Vietnam</div>
-                            <p>Supervised and trained 50+ volunteers, achieving a 70% performance improvement by implementing structured training and feedback systems.
-                                Developed advanced proficiency in Vietnamese, enhancing communication and adaptability in multicultural settings.
-                                Taught and mentored new Volunteer Representatives, helping them develop skills in time management, teaching skills and Vietnamese fluency.
-                                </p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">August 2022 - August 2024</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Apprentice Carpenter</h3>
-                            <div class="subheading mb-3">The Conco Companies | Concord,California</div>
-                            <p>
-                                Constructed concrete formwork for high-rise foundations, achieving 20% faster project completion rate through process improvements.
-                                Demonstrated adaptability in high-pressure, time-sensitive environments, consistently meeting quality standards.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">April 2022 - July 2022</span></div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Education-->
-            <section class="resume-section" id="education">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Education</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Brigham Young University School of Accountancy</h3>
-                            <div class="subheading mb-3">Bachelor of Science</div>
-                            <div>Accounting</div>
-                            <p>GPA: 3.75</p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">September 2021 - May 2027</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Relevant Coursework</h3>
-                            <ul class="fa-ul mb-0">
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Principles of Accounting I, II
-                                </li>
-                            </ul>
-                            <ul class="fa-ul mb-0">
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Principles of Finance
-                                </li>
-                            </ul>
-                            <ul class="fa-ul mb-0">
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Information Systems
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Skills-->
-            <section class="resume-section" id="skills">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Skills</h2>
-                    <div class="subheading mb-3">Abilities</div>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Analytical skills, leadership, strong verbal and written communication
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Fluent Vietnamese
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Microsoft Excel
-                        </li>
-                    </ul>
-                    <br>
-                    <div class="subheading mb-3">Navigation & Tools</div>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Tableau
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            VBA Programming in Excel
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            TaxSlayer Pro
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            HTML, CSS, Bootstrap
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Interests-->
-            <section class="resume-section" id="interests">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Interests</h2>
-                    <p>Apart from my professional pursuits, I enjoy immersing myself in diverse activities. I have a passion for learning Vietnamese and exploring its rich culture and language. Soccer is a sport I both play and follow avidly. Music is another cornerstone of my life; I find joy in playing the piano and discovering new pieces to master.</p>
-                    <p class="mb-0">When indoors, I delve into topics related to accounting and law, driven by my curiosity for financial systems and legal frameworks. I also dedicate time to expanding my knowledge of emerging trends and innovations in these fields.</p>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Awards-->
-            <section class="resume-section" id="awards">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Certifications</h2>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                            IRS | Volunteer Income Tax Assistant - Advanced
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+        </main>
+
+        <footer class="footer">
+            <p>QuickBooks Transaction Categorizer v2.0 | Powered by Claude AI</p>
+            <p class="privacy-note">🔒 All processing happens securely via Anthropic API. Your data is not stored.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
 </html>
